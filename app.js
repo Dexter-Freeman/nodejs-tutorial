@@ -158,3 +158,23 @@ fs.unlink('./stuff/fsWriteAsync.txt', err => {
 });
 
 // __________________________________________
+
+// Readable Streams // Writable Streams
+
+
+// создадим поток чтения
+const myReadStream = fs.createReadStream(__dirname + '/lorem.txt', 'utf8');
+// создадим поток записи
+const myWriteStream = fs.createWriteStream(__dirname + '/writeMeChunk.txt');
+
+// по мере получения данных, будем выводить их в консоль
+myReadStream.on('data', chunk => {
+  console.log('new chunk recieved');
+  // console.log(chunk);
+  // запишем полученные данные в файл
+  myWriteStream.write(chunk);
+});
+
+fs.unlink('writeMeChunk.txt', err => {});
+
+//_______________________
