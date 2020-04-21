@@ -8,14 +8,28 @@ const app = express();
 // в ней создадим темплейты
 app.set('view engine', 'ejs');
 
+// подключим static middleware
+app.use('/assets', express.static('assets'));
+// express.static мидлварь для статических файлов
+
+// Вообще мидлвари в express подразумевают передачу трех параметров в коллбек
+// app.use('/assets/', (req, res, next) {
+//   // здесь вызов next означает что работа мидлвари была завершена и передать управление дальше
+//   console.log(req.url);
+//   next();
+// });
+
 // Пропишем некоторые роуты
 app.get('/', (req, res) => {
   // Для отправки файла
-  res.sendFile(__dirname + '/index.html');
+  // res.sendFile(__dirname + '/index.html');
+  // Для рендеринга шаблона
+  res.render('index');
 });
 
 app.get('/contact', (req, res) => {
-  res.send('This is the contact page');
+  // res.send('This is the contact page');
+  res.render('contact');
 });
 
 // Для того чтобы получить доступ к параметрам адресной строки будем использовать
