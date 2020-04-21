@@ -3,9 +3,15 @@ const express = require('express');
 // Модуль express возвращает функцию, поэтому нам надо его вызвать
 const app = express();
 
+// Добавим шаблонизатор EJS, можно использовать любой другой шаблонизатор
+// Создадим папку views в корневой директории приложения
+// в ней создадим темплейты
+app.set('view engine', 'ejs');
+
 // Пропишем некоторые роуты
 app.get('/', (req, res) => {
-  res.send('This is the homepage');
+  // Для отправки файла
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/contact', (req, res) => {
@@ -14,8 +20,16 @@ app.get('/contact', (req, res) => {
 
 // Для того чтобы получить доступ к параметрам адресной строки будем использовать
 // свойство params у объекта res.param
-app.get('/profile/:id', (req, res) => {
-  res.send('You request the profile with id of: ' + req.params.id);
+// app.get('/profile/:id', (req, res) => {
+//   res.send('You request the profile with id of: ' + req.params.id);
+// });
+
+app.get('/profile/:name', (req, res) => {
+  // здесь мы можем например сделать запрос к базе данных
+  // и из полученных данных сгенерировать страницу
+  // или передать любые другие данные
+  const data = {age: 34, job: 'jedi', hobbies: ['walking', 'reading', 'eating']}
+  res.render('profile', { person: req.params.name, data } );
 });
 
 // Укажем какой порт необходимо слушать приложению (серверу)
