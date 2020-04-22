@@ -1,0 +1,18 @@
+<%- include('partials/head') %>
+    <h1>My ToDo list</h1>
+    <div id="todo-table">
+        <form action="/todo" method="POST" id="add-todo">
+            <input type="text" 
+                name="item" 
+                id="new-item" 
+                placeholder="Add new item"
+                required >
+            <button type="submit">Add item</button>
+        </form>
+        <ul>
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+        </ul>
+    </div>
+<%- include('partials/footer') %>
