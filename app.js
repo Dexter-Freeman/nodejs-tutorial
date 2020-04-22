@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 // Модуль express возвращает функцию, поэтому нам надо его вызвать
 const app = express();
@@ -7,6 +8,9 @@ const app = express();
 // Создадим папку views в корневой директории приложения
 // в ней создадим темплейты
 app.set('view engine', 'ejs');
+
+// create application/x-www-form-urlencoded parser
+let urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // подключим static middleware
 app.use('/assets', express.static('assets'));
@@ -29,7 +33,15 @@ app.get('/', (req, res) => {
 
 app.get('/contact', (req, res) => {
   // res.send('This is the contact page');
-  res.render('contact');
+  // для доступа к строке запроса (query string), используем свойство query обьекта request
+  console.log(req.query);
+  res.render('contact', { qs: req.query });
+});
+
+app.post('/contact', urlencodedParser, (req, res) => {
+  // bodyParser дает нам доступ к req.body
+  console.log(req.body);
+  res.render('contact-sucsess', { data: req.body });
 });
 
 // Для того чтобы получить доступ к параметрам адресной строки будем использовать

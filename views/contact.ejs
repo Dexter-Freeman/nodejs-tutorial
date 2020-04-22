@@ -1,5 +1,23 @@
 <%- include('partials/head') %>
-    <%- include('partials/nav') %>
-    <h1>Welcome to the most awesome website on the net</h1>
-    <p>You won't find a website better anywhere else!</p>
+<%- include('partials/nav') %>
+<h1>Contact page</h1>
+<p>You won't find a website better anywhere else!</p>
+<p>Your query string is: <%= JSON.stringify(qs) %></p>
+<form action="/contact" method="POST" id="contact-form">
+    <div>
+        <label for="who">Who do you want to contact?</label>
+        <input type="text" name="who" value="<%= qs.person %>">
+    </div>
+    <div>
+        <label for="department">Which department?</label>
+        <input type="text" name="department" value="<%= qs.department %>">
+    </div>
+    <div>
+        <label for="email">Your email</label>
+        <input type="email" name="email">
+    </div>
+    <div>
+        <input type="submit" value="submit">
+    </div>
+</form>
 <%- include('partials/footer') %>
