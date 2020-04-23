@@ -10,9 +10,9 @@
             <button type="submit">Add item</button>
         </form>
         <ul>
-            <li>item 1</li>
-            <li>item 2</li>
-            <li>item 3</li>
+            <% todos.forEach(todo => { %>
+                <li><%= todo.item %></li>
+            <% }); %>
         </ul>
     </div>
 <%- include('partials/footer') %>

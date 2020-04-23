@@ -10,6 +10,9 @@ app.set('view engine', 'ejs');
 
 // static files
 app.use(express.static('public'));
+// parse json middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 // fire controllers
 toDoController(app);
