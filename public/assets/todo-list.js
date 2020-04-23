@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const todos = document.querySelectorAll('li');
     todos.forEach(todo => {
         todo.addEventListener('click', e => {
-            const item = e.target.textContent.replace(/ /g, '-');
+            const item = e.target.textContent.replace(/ /g, '--');
 
             // можно сделать как минимум двумя способами
             // первый способ
